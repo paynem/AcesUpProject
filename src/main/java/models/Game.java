@@ -48,7 +48,7 @@ public class Game {
     public void dealFour() {
         // As long as the deck isn't empty, we pull 4 cards from it and put one of each
         // of them into the 4 columns.
-        if (deck.size() != 0) {
+        if (deck.size() > 4) {
             for (int i = 0; i < 4; i++) {
                 addCardToCol(i, deck.get(i));
                 this.deck.remove(i);
