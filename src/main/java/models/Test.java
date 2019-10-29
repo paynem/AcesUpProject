@@ -4,6 +4,7 @@ public class Test {
     public static void main(String[] args) {
     
         testMichaelsStuff();
+        testJaspreetsStuff();
 
     }
     static void deckCheck(Game g) {
@@ -24,7 +25,7 @@ public class Test {
     static void multipleDeals(Game g){
         for (int i = 0; i < 4; i++)
         {
-            for (int j = 0; j < g.cols.get(0).size(); j++)
+            for (int j = 0; j < g.cols.get(i).size(); j++)
             {
                 System.out.print("Column " + i + " card " + j + ": ");
                 System.out.print(g.cols.get(i).get(j).toString());
@@ -72,6 +73,51 @@ public class Test {
         deckCheck(d);
         deckCheck(e);
     }
+    
+
+    static void testJaspreetsStuff(){
 
 
+        // Set "PRIVATE  boolean columnHasCards(int columnNumber)" to "PUBLIC boolean columnHasCards(int columnNumber)" for execution in Game.java to test
+
+                //      Tests columnHasCards        //
+        /*
+        System.out.print("\n\nTesting Remove & columnHasCards (Jaspreet)\n");
+
+        Game k = new Game();
+        boolean temp1 = k.columnHasCards(0);
+        System.out.println("\nExperimenal: Column 0 has cards: " + temp1);
+        System.out.println("Expected: Column 0 has cards: FALSE");
+        System.out.print("\nBuilding deck ...\n");
+        // duplicating process of ApplicationController.Java
+        k.buildDeck();
+        k.shuffle();
+        System.out.print("Now dealing 2 times.\n");
+        k.dealFour();
+        k.dealFour();
+
+        System.out.print("Checking contents of columns (each should have 2 cards).\n");
+        multipleDeals(k);
+        boolean temp2 = k.columnHasCards(0);
+        System.out.println("\nExperimental: Column 0 has cards: " + temp2);
+        System.out.println("Expected: Column 0 has cards: TRUE\n");
+        */
+
+        Game g = new Game();
+        System.out.print("Building deck ...\n");
+        // duplicating process of ApplicationController.Java
+        
+        g.buildDeck();
+        g.dealFour();
+        System.out.print("Contents of deck\n");
+        multipleDeals(g);
+        System.out.print("Attempting to remove column 0 (should WORK)\n");
+        g.remove(0);
+        System.out.print("Contents after attempting to remove\n");
+        multipleDeals(g);
+        System.out.print("Attempting to remove column 3 (should FAIL)\n");
+        g.remove(3);
+        System.out.print("Contents after attempting to remove\n");
+        multipleDeals(g);
+    }
 }
