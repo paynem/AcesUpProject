@@ -1,20 +1,30 @@
-tr{
-width:500px;
+body {
+	background: #6ab446 !important;
+}
+tr {
+	width: 500px;
 }
 
-td{
-width:100px;
-height:20px;
-text-align:center;
+td {
+	width: 100px;
+	height: 20px;
+	text-align: center;
 }
 
-.title{
-font-weight: bold;
+.title {
+	font-weight: bold;
 }
 
-.cardLocation{
-width: 100px;
-/*background-color:#F0F0F0;*/
+.cardLocation {
+	width: 100px;
+	/*background-color:#F0F0F0;*/
 }
-
+#dealButton {
+    border: none;
+    background: transparent; 
+}
+#Discard {
+    border: none;
+    background: transparent; 
+}
 /*<img id="diamond-jack-2" src="photos/cardback.png" style="position: absolute; top: 40px;">*/
