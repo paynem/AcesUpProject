@@ -14,5 +14,7 @@ font-weight: bold;
 
 .cardLocation{
 width: 100px;
-background-color:#F0F0F0;
+/*background-color:#F0F0F0;*/
 }
+
+/*<img id="diamond-jack-2" src="photos/cardback.png" style="position: absolute; top: 40px;">*/
