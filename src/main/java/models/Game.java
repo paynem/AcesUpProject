@@ -57,13 +57,16 @@ public class Game {
     }
 
     public void remove(int columnNumber) {
-        if(columnHasCards(columnNumber)) {
-            Card initial = getTopCard(columnNumber);    // store card we attempt to remove
+        if (columnHasCards(columnNumber)) {
+            Card initial = getTopCard(columnNumber); // store card we attempt to remove
             for (int i = 0; i < 4; i++) {
-                if (i != columnNumber && columnHasCards(i)) {      // iterate each column with a card
+                if (i != columnNumber && columnHasCards(i)) { // iterate each column with a card
                     Card tempTop = getTopCard(i);
-                    if (initial.getSuit() == tempTop.getSuit() && initial.getValue() < tempTop.getValue()) { // if removal conditions apply
-                        this.cols.get(columnNumber).remove(this.cols.get(columnNumber).size() - 1);          // remove the card
+                    if (initial.getSuit() == tempTop.getSuit() && initial.getValue() < tempTop.getValue()) { // if
+                                                                                                             // removal
+                                                                                                             // conditions
+                                                                                                             // apply
+                        this.cols.get(columnNumber).remove(this.cols.get(columnNumber).size() - 1); // remove the card
                     }
                 }
             }
@@ -73,7 +76,7 @@ public class Game {
     private boolean columnHasCards(int columnNumber) {
         // check indicated column for number of cards; if no cards return false,
         // otherwise return true
-         if(this.cols.get(columnNumber).size()>0){
+        if (this.cols.get(columnNumber).size() > 0) {
             return true;
         }
         return false;
@@ -85,7 +88,7 @@ public class Game {
 
     public void move(int columnFrom, int columnTo) {
         // remove the top card from the columnFrom column, add it to the columnTo column
-        if(columnHasCards(columnFrom)){
+        if (columnHasCards(columnFrom)) {
             addCardToCol(columnTo, getTopCard(columnFrom));
             remove(columnFrom);
         }
