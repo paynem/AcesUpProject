@@ -1,196 +1,375 @@
-<h1>Aces Up</h1>
+<!--I merged the original AcesUp.flt.html with the defaultlayout.ftl.html file that was provided by the teacher. It had all
+of the includes that we needed to implement bootstrap and such.-->
+<!DOCTYPE html>
+<html lang="en">
+	<head></head>
+		<link href="/assets/css/AcesUp.css" rel="stylesheet" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<!-- Necessary Bootstrap and jquery includes -->
+		<link
+			href="/assets/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
+			rel="stylesheet"
+		/>
+		<script
+			type="text/javascript"
+			src="/assets/webjars/jquery/2.1.3/jquery.js"
+		></script>
+		
+	</head>
+	<body>
+<!-- Our layout uses bootstrap to divide the elements into 6 2-unit length columns.  The deal and discard piles occupy the first column.
+Each card pile gets its own separate column.  Also, originally, the card piles were organized into one large table with 4 columns.  In order to give each card pile its 
+own bootstrap column, I had to break the table up into 4 smaller 1-column tables. The Restart, Undo, and Exit buttons all occupy the final bootstrap column.-->
+		<div class="container">
+			<div class="row">
+				<!--The deal pile acts as a deal button as well.  When the user taps it or single clicks it, it deals 4 cards as long there are cards remaining in the deck.
+				Both buttons were styled to remove the button border, so they were more uniform with the card piles. -->
+				<div class="col-lg-2 col-md-2 col-sm-2">
+					<button id="dealButton">
+						<img src="/assets/images/backpuffingrass.png" />
+					</button>
+					<br />
+					<!-- In this iteration/version of the UI, the discard pile is currently a non-functional button (we also don't store the discarded cards anywhere the moment) -->
+					<button id="Discard">
+						<img src="/assets/images/backpuffingrass.png" />
+					</button>
+				</div>
+				<!-- Each cell of the card pile columns is styled so that as the piles are built up during the course of the game, only the top portion of each card is
+				displayed. -->
+				<div class="col-lg-2 col-md-2 col-sm-2">
+					<table>
+						<tr>
+							<td class="columnOfCards" id="c0">
+								<table>
+									<tr>
+										<td class="cardLocation l0" draggable="true" style="position: absolute; top: 0px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l1" style="position: absolute; top: 20px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l2"style="position: absolute; top: 40px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l3"style="position: absolute; top: 60px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l4"style="position: absolute; top: 80px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l5"style="position: absolute; top: 100px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l6"style="position: absolute; top: 120px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l7"style="position: absolute; top: 140px;" ></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l8"style="position: absolute; top: 160px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l9"style="position: absolute; top: 180px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l10"style="position: absolute; top: 200px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l11"style="position: absolute; top: 220px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l12"style="position: absolute; top: 240px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l13"style="position: absolute; top: 260px;"></td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</div>
 
-<link href="/assets/css/AcesUp.css" rel="stylesheet">
-<script type="text/javascript" src="/assets/webjars/jquery/2.1.3/jquery.js"></script>
+				<div class="col-lg-2 col-md-2 col-sm-2">
+					<table>
+						<tr>
+							<td class="columnOfCards" id="c1" draggable="true">
+								<table>
+									<tr>
+										<td class="cardLocation l0" style="position: absolute; top: 0px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l1" style="position: absolute; top: 20px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l2"style="position: absolute; top: 40px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l3"style="position: absolute; top: 60px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l4"style="position: absolute; top: 80px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l5"style="position: absolute; top: 100px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l6"style="position: absolute; top: 120px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l7"style="position: absolute; top: 140px;" ></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l8"style="position: absolute; top: 160px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l9"style="position: absolute; top: 180px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l10"style="position: absolute; top: 200px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l11"style="position: absolute; top: 220px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l12"style="position: absolute; top: 240px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l13"style="position: absolute; top: 260px;"></td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</div>
 
-<body>
+				<div class="col-lg-2 col-md-2 col-sm-2">
+					<table>
+						<tr>
+							<td class="columnOfCards" id="c2" draggable="true">
+								<table>
+									<tr>
+										<td class="cardLocation l0" style="position: absolute; top: 0px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l1" style="position: absolute; top: 20px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l2"style="position: absolute; top: 40px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l3"style="position: absolute; top: 60px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l4"style="position: absolute; top: 80px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l5"style="position: absolute; top: 100px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l6"style="position: absolute; top: 120px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l7"style="position: absolute; top: 140px;" ></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l8"style="position: absolute; top: 160px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l9"style="position: absolute; top: 180px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l10"style="position: absolute; top: 200px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l11"style="position: absolute; top: 220px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l12"style="position: absolute; top: 240px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l13"style="position: absolute; top: 260px;"></td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<div class="col-lg-2 col-md-2 col-sm-2">
+					<table>
+						<tr>
+							<td class="columnOfCards" id="c3" draggable="true" >
+								<table>
+									<tr>
+										<td class="cardLocation l0" style="position: absolute; top: 0px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l1" style="position: absolute; top: 20px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l2"style="position: absolute; top: 40px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l3"style="position: absolute; top: 60px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l4"style="position: absolute; top: 80px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l5"style="position: absolute; top: 100px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l6"style="position: absolute; top: 120px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l7"style="position: absolute; top: 140px;" ></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l8"style="position: absolute; top: 160px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l9"style="position: absolute; top: 180px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l10"style="position: absolute; top: 200px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l11"style="position: absolute; top: 220px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l12"style="position: absolute; top: 240px;"></td>
+									</tr>
+									<tr>
+										<td class="cardLocation l13"style="position: absolute; top: 260px;"></td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<!-- These buttons are currently functionless, but hopefully they'll work soon!  They use bootstrap buttons that take up the entire length of a column. -->
+				<div class="col-lg-2 col-md-2 col-sm-2">
+					<button type="undo" class="btn btn-secondary btn-lg btn-block">
+						Undo
+					</button>
 
-<table>
-    <tr class="title">
-        <td>Column0</td>
-        <td >Column1</td>
-        <td >Column2</td>
-        <td >Column3</td>
-    </tr>
+					<button type="restart" class="btn btn-secondary btn-lg btn-block">
+						Restart
+					</button>
 
-    <tr><td class="columnOfCards" id="c0">
-        <table>
-            <tr><td class="cardLocation l0"></td></tr>
-            <tr><td class="cardLocation l1"></td></tr>
-            <tr><td class="cardLocation l2"></td></tr>
-            <tr><td class="cardLocation l3"></td></tr>
-            <tr><td class="cardLocation l4"></td></tr>
-            <tr><td class="cardLocation l5"></td></tr>
-            <tr><td class="cardLocation l6"></td></tr>
-            <tr><td class="cardLocation l7"></td></tr>
-            <tr><td class="cardLocation l8"></td></tr>
-            <tr><td class="cardLocation l9"></td></tr>
-            <tr><td class="cardLocation l10"></td></tr>
-            <tr><td class="cardLocation l11"></td></tr>
-            <tr><td class="cardLocation l12"></td></tr>
-            <tr><td class="cardLocation l13"></td></tr>
-        </table>
-    </td>
-        <td class="columnOfCards" id="c1">
-            <table>
-                <tr><td class="cardLocation l0"></td></tr>
-                <tr><td class="cardLocation l1"></td></tr>
-                <tr><td class="cardLocation l2"></td></tr>
-                <tr><td class="cardLocation l3"></td></tr>
-                <tr><td class="cardLocation l4"></td></tr>
-                <tr><td class="cardLocation l5"></td></tr>
-                <tr><td class="cardLocation l6"></td></tr>
-                <tr><td class="cardLocation l7"></td></tr>
-                <tr><td class="cardLocation l8"></td></tr>
-                <tr><td class="cardLocation l9"></td></tr>
-                <tr><td class="cardLocation l10"></td></tr>
-                <tr><td class="cardLocation l11"></td></tr>
-                <tr><td class="cardLocation l12"></td></tr>
-                <tr><td class="cardLocation l13"></td></tr>
-            </table>
-        </td>
-        <td class="columnOfCards" id="c2">
-            <table>
-                <tr><td class="cardLocation l0"></td></tr>
-                <tr><td class="cardLocation l1"></td></tr>
-                <tr><td class="cardLocation l2"></td></tr>
-                <tr><td class="cardLocation l3"></td></tr>
-                <tr><td class="cardLocation l4"></td></tr>
-                <tr><td class="cardLocation l5"></td></tr>
-                <tr><td class="cardLocation l6"></td></tr>
-                <tr><td class="cardLocation l7"></td></tr>
-                <tr><td class="cardLocation l8"></td></tr>
-                <tr><td class="cardLocation l9"></td></tr>
-                <tr><td class="cardLocation l10"></td></tr>
-                <tr><td class="cardLocation l11"></td></tr>
-                <tr><td class="cardLocation l12"></td></tr>
-                <tr><td class="cardLocation l13"></td></tr>
-            </table>
-        </td>
-        <td class="columnOfCards" id="c3">
-            <table>
-                <tr><td class="cardLocation l0"></td></tr>
-                <tr><td class="cardLocation l1"></td></tr>
-                <tr><td class="cardLocation l2"></td></tr>
-                <tr><td class="cardLocation l3"></td></tr>
-                <tr><td class="cardLocation l4"></td></tr>
-                <tr><td class="cardLocation l5"></td></tr>
-                <tr><td class="cardLocation l6"></td></tr>
-                <tr><td class="cardLocation l7"></td></tr>
-                <tr><td class="cardLocation l8"></td></tr>
-                <tr><td class="cardLocation l9"></td></tr>
-                <tr><td class="cardLocation l10"></td></tr>
-                <tr><td class="cardLocation l11"></td></tr>
-                <tr><td class="cardLocation l12"></td></tr>
-                <tr><td class="cardLocation l13"></td></tr>
-            </table>
-        </td>
-    </tr>
-</table>
+					<button type="exit" class="btn btn-secondary btn-lg btn-block">
+						Exit
+					</button>
+				</div>
+			</div>
+		</div>
+		<script>
+			var game;
 
-<button id="dealButton">Deal</button>
-<BR>Remove from: <button id="Remove1">Column1</button><button id="Remove2">Column2</button><button id="Remove3">Column3</button><button id="Remove4">Column4</button>
+			function display(game) {
+				console.log(game);
 
-<BR>Move from column <input type="text" id="from_col"  /> to <input type="text" id="to_col"  /> <button id="moveButton">Move</button>
+				$(".columnOfCards .cardLocation").html("");
+				// I had to change these each functions so that they displayed the card images instead of values.  Ninja requires you to store all static assets in the
+				// assets folder (which took a bit of research to find out; although it should have been obvious, I suppose).  Fortunately, I could still use the data
+				// generated from our java code to pick the correct/appropriate cards.  I just had to mix it with string values that are eventually turned into HTML by jquery
+				$.each(game.cols[0], function(key, val) {
+					$("#c0 .l" + key).html(
+						'<img src="assets/images/' + val.suit + val.value + '.png"/>'
+					);
+				});
 
-<script>
+				$.each(game.cols[1], function(key, val) {
+					$("#c1 .l" + key).html(
+						'<img src="assets/images/' + val.suit + val.value + '.png"/>'
+					);
+				});
 
-var game;
+				$.each(game.cols[2], function(key, val) {
+					$("#c2 .l" + key).html(
+						'<img src="assets/images/' + val.suit + val.value + '.png"/>'
+					);
+				});
 
-function display(game) {
-console.log(game);
+				$.each(game.cols[3], function(key, val) {
+					$("#c3 .l" + key).html(
+						'<img src="assets/images/' + val.suit + val.value + '.png"/>'
+					);
+				});
+			}
 
-$( '.columnOfCards .cardLocation' ).html("");
+			// Calls ApplicationController.gameGet()
+			$.getJSON("http://localhost:8080/game", function(data) {
+				display(data);
+				game = data;
+			});
+			$("#dealButton").click(function() {
+				$.ajax({
+					type: "POST",
+					url: "/dealGame",
+					data: JSON.stringify(game),
+					success: function(data, status) {
+						console.log("Data: " + data + "\nStatus: " + status);
+						game = data;
+						display(data);
+					},
+					contentType: "application/json; charset=utf-8",
+					dataType: "json"
+				});
+			});
 
-    $.each(game.cols[0], function( key, val ) {
-        $( '#c0 .l'+key ).html(val.value + val.suit);
-    });
+			function removeCard(colNumber) {
+				$.ajax({
+					type: "POST",
+					url: "/removeCard/" + colNumber,
+					data: JSON.stringify(game),
+					success: function(data, status) {
+						console.log("Data: " + data + "\nStatus: " + status);
+						game = data;
+						display(data);
+					},
+					contentType: "application/json; charset=utf-8",
+					dataType: "json"
+				});
+			}
+			// Only minor alterations had to be made here to get cards to discard when clicked (just had to specify the column number).
+			$('#c0').click(function() {
+				removeCard(0);
+			});
+			$('#c1').click(function() {
+				removeCard(1);
+			});
+			$('#c2').click(function() {
+				removeCard(2);
+			});
+			$('#c3').click(function() {
+				removeCard(3);
+			});
 
- $.each(game.cols[1], function( key, val ) {
-        $( '#c1 .l'+key ).html(val.value + val.suit);
-    });
-
- $.each(game.cols[2], function( key, val ) {
-        $( '#c2 .l'+key ).html(val.value + val.suit);
-    });
-
- $.each(game.cols[3], function( key, val ) {
-        $( '#c3 .l'+key ).html(val.value + val.suit);
-    });
-
-
-
-}
-
-// Calls ApplicationController.gameGet()
-$.getJSON("http://localhost:8080/game", function( data ) {
-display(data);
-game = data;
-});
-
-
-$("#dealButton").click(function(){
-$.ajax({
-  type: "POST",
-  url: "/dealGame",
-  data: JSON.stringify(game),
-  success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
-        game = data;
-        display(data);},
-  contentType:"application/json; charset=utf-8",
-  dataType:"json",
-});
-});
-
-
-function removeCard(colNumber){
-$.ajax({
-type: "POST",
-url: "/removeCard/"+colNumber,
-data: JSON.stringify(game),
-success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
-game = data;
-display(data);},
-contentType:"application/json; charset=utf-8",
-dataType:"json",
-});
-
-}
-
-
-$("#Remove1").click(function(){
-    removeCard(0);
-});
-$("#Remove2").click(function(){
-    removeCard(1);
-});
-$("#Remove3").click(function(){
-    removeCard(2);
-});
-$("#Remove4").click(function(){
-    removeCard(3);
-});
-
-
-$("#moveButton").click(function(){
-var colFrom = $("#from_col").val();
-var colTo = $("#to_col").val();
-$.ajax({
-  type: "POST",
-  url: "/moveCard/"+colFrom+"/"+colTo,
-  data: JSON.stringify(game),
-  success: function(data, status){console.log("Data: " + data + "\nStatus: " + status);
-        game = data;
-        display(data);},
-  contentType:"application/json; charset=utf-8",
-  dataType:"json",
-});
-});
-
-
-</script>
-
-
-
-</body>
+			$("#moveButton").click(function() {
+				var colFrom = $("#from_col").val();
+				var colTo = $("#to_col").val();
+				$.ajax({
+					type: "POST",
+					url: "/moveCard/" + colFrom + "/" + colTo,
+					data: JSON.stringify(game),
+					success: function(data, status) {
+						console.log("Data: " + data + "\nStatus: " + status);
+						game = data;
+						display(data);
+					},
+					contentType: "application/json; charset=utf-8",
+					dataType: "json"
+				});
+			});
+		</script>
+		
+		<script
+			type="text/javascript"
+			src="/assets/webjars/jquery/2.1.3/jquery.js"
+		></script>
+		<script
+			type="text/javascript"
+			src="/assets/webjars/bootstrap/3.3.4/js/bootstrap.min.js"
+		></script>
+	</body>
 </html>
