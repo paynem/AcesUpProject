@@ -1,9 +1,11 @@
+<!--I merged the original AcesUp.flt.html with the defaultlayout.ftl.html file that was provided by the teacher. It had all
+of the includes that we needed to implement bootstrap and such.-->
 <!DOCTYPE html>
 <html lang="en">
-	<head>
+	<head></head>
 		<link href="/assets/css/AcesUp.css" rel="stylesheet" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<!-- Le styles -->
+		<!-- Necessary Bootstrap and jquery includes -->
 		<link
 			href="/assets/webjars/bootstrap/3.3.4/css/bootstrap.min.css"
 			rel="stylesheet"
@@ -12,28 +14,35 @@
 			type="text/javascript"
 			src="/assets/webjars/jquery/2.1.3/jquery.js"
 		></script>
+		
 	</head>
 	<body>
-
+<!-- Our layout uses bootstrap to divide the elements into 6 2-unit length columns.  The deal and discard piles occupy the first column.
+Each card pile gets its own separate column.  Also, originally, the card piles were organized into one large table with 4 columns.  In order to give each card pile its 
+own bootstrap column, I had to break the table up into 4 smaller 1-column tables. The Restart, Undo, and Exit buttons all occupy the final bootstrap column.-->
 		<div class="container">
 			<div class="row">
+				<!--The deal pile acts as a deal button as well.  When the user taps it or single clicks it, it deals 4 cards as long there are cards remaining in the deck.
+				Both buttons were styled to remove the button border, so they were more uniform with the card piles. -->
 				<div class="col-lg-2 col-md-2 col-sm-2">
 					<button id="dealButton">
 						<img src="/assets/images/backpuffingrass.png" />
 					</button>
 					<br />
+					<!-- In this iteration/version of the UI, the discard pile is currently a non-functional button (we also don't store the discarded cards anywhere the moment) -->
 					<button id="Discard">
 						<img src="/assets/images/backpuffingrass.png" />
 					</button>
 				</div>
-
+				<!-- Each cell of the card pile columns is styled so that as the piles are built up during the course of the game, only the top portion of each card is
+				displayed. -->
 				<div class="col-lg-2 col-md-2 col-sm-2">
 					<table>
 						<tr>
 							<td class="columnOfCards" id="c0">
 								<table>
 									<tr>
-										<td class="cardLocation l0" style="position: absolute; top: 0px;"></td>
+										<td class="cardLocation l0" draggable="true" style="position: absolute; top: 0px;"></td>
 									</tr>
 									<tr>
 										<td class="cardLocation l1" style="position: absolute; top: 20px;"></td>
@@ -83,7 +92,7 @@
 				<div class="col-lg-2 col-md-2 col-sm-2">
 					<table>
 						<tr>
-							<td class="columnOfCards" id="c1">
+							<td class="columnOfCards" id="c1" draggable="true">
 								<table>
 									<tr>
 										<td class="cardLocation l0" style="position: absolute; top: 0px;"></td>
@@ -136,7 +145,7 @@
 				<div class="col-lg-2 col-md-2 col-sm-2">
 					<table>
 						<tr>
-							<td class="columnOfCards" id="c2">
+							<td class="columnOfCards" id="c2" draggable="true">
 								<table>
 									<tr>
 										<td class="cardLocation l0" style="position: absolute; top: 0px;"></td>
@@ -188,7 +197,7 @@
 				<div class="col-lg-2 col-md-2 col-sm-2">
 					<table>
 						<tr>
-							<td class="columnOfCards" id="c3">
+							<td class="columnOfCards" id="c3" draggable="true" >
 								<table>
 									<tr>
 										<td class="cardLocation l0" style="position: absolute; top: 0px;"></td>
@@ -237,7 +246,7 @@
 						</tr>
 					</table>
 				</div>
-
+				<!-- These buttons are currently functionless, but hopefully they'll work soon!  They use bootstrap buttons that take up the entire length of a column. -->
 				<div class="col-lg-2 col-md-2 col-sm-2">
 					<button type="undo" class="btn btn-secondary btn-lg btn-block">
 						Undo
@@ -260,7 +269,9 @@
 				console.log(game);
 
 				$(".columnOfCards .cardLocation").html("");
-
+				// I had to change these each functions so that they displayed the card images instead of values.  Ninja requires you to store all static assets in the
+				// assets folder (which took a bit of research to find out; although it should have been obvious, I suppose).  Fortunately, I could still use the data
+				// generated from our java code to pick the correct/appropriate cards.  I just had to mix it with string values that are eventually turned into HTML by jquery
 				$.each(game.cols[0], function(key, val) {
 					$("#c0 .l" + key).html(
 						'<img src="assets/images/' + val.suit + val.value + '.png"/>'
@@ -320,7 +331,7 @@
 					dataType: "json"
 				});
 			}
-
+			// Only minor alterations had to be made here to get cards to discard when clicked (just had to specify the column number).
 			$('#c0').click(function() {
 				removeCard(0);
 			});
@@ -351,7 +362,7 @@
 				});
 			});
 		</script>
-		<!--<script src="/views/AcesUp/Aces.js"></script>-->
+		
 		<script
 			type="text/javascript"
 			src="/assets/webjars/jquery/2.1.3/jquery.js"
