@@ -2,6 +2,7 @@ package models;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -17,6 +18,8 @@ public class Game {
     // need to.
     public java.util.List<java.util.List<Card>> cols = new ArrayList<>(4);
 
+    public java.util.List<java.util.List<Card>> discardPile = new ArrayList<>(1);
+
     public Game() {
         // Since we have an array list of arraylists. We need to set up the arraylist in
         // each index
@@ -28,6 +31,9 @@ public class Game {
         cols.add(a3);
         ArrayList<Card> a4 = new ArrayList<Card>();
         cols.add(a4);
+
+        ArrayList<Card> discard = new ArrayList<Card>();
+        discardPile.add(discard);
     }
 
     public void buildDeck() {
@@ -67,6 +73,7 @@ public class Game {
                                                                                                              // conditions
                                                                                                              // apply
                         this.cols.get(columnNumber).remove(this.cols.get(columnNumber).size() - 1); // remove the card
+                        this.discardPile.get(0).add(initial);
                     }
                 }
             }

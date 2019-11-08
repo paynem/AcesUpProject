@@ -22,9 +22,21 @@
 						<img src="/assets/images/backpuffingrass.png" />
 					</button>
 					<br />
-					<button id="Discard">
-						<img src="/assets/images/backpuffingrass.png" />
-					</button>
+					<div class="row">
+						<div class="col-lg-2 col-md-2 col-sm-2">
+							<table>
+								<tr>
+									<td class="columnOfCards" id="discardPile">
+										<table>
+											<tr>
+												<td class="cardLocation l0" style="position: absolute; top: 0px;"></td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
 				</div>
 
 				<div class="col-lg-2 col-md-2 col-sm-2">
@@ -261,6 +273,8 @@
 
 				$(".columnOfCards .cardLocation").html("");
 
+				getDiscardImagePath(game);
+
 				$.each(game.cols[0], function(key, val) {
 					$("#c0 .l" + key).html(
 						'<img src="assets/images/' + val.suit + val.value + '.png"/>'
@@ -319,6 +333,25 @@
 					contentType: "application/json; charset=utf-8",
 					dataType: "json"
 				});
+			}
+
+			//renders either the default card image or the top card in the discard pile
+			function getDiscardImagePath(game) {
+
+				//if discard pile is empty, use puffin
+				if(game.discardPile[0].length == 0){
+					$("#discardPile .l0").html(
+						'<img src="/assets/images/backpuffingrass.png" />'
+					);
+				}
+				else
+				{
+					var val = game.discardPile[0][game.discardPile[0].length - 1]; //get top card
+					//render top card
+					$('#discardPile .l0').html(
+						'<img src="assets/images/' + val.suit + val.value + '.png"/>'
+					);
+				}
 			}
 
 			$('#c0').click(function() {
