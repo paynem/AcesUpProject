@@ -14,7 +14,6 @@ of the includes that we needed to implement bootstrap and such.-->
 			type="text/javascript"
 			src="/assets/webjars/jquery/2.1.3/jquery.js"
 		></script>
-		
 	</head>
 	<body>
 <!-- Our layout uses bootstrap to divide the elements into 6 2-unit length columns.  The deal and discard piles occupy the first column.
@@ -24,18 +23,31 @@ own bootstrap column, I had to break the table up into 4 smaller 1-column tables
 			<div class="row">
 				<!--The deal pile acts as a deal button as well.  When the user taps it or single clicks it, it deals 4 cards as long there are cards remaining in the deck.
 				Both buttons were styled to remove the button border, so they were more uniform with the card piles. -->
+
 				<div class="col-lg-2 col-md-2 col-sm-2">
 					<button id="dealButton">
 						<img src="/assets/images/backpuffingrass.png" />
 					</button>
 					<br />
-					<!-- In this iteration/version of the UI, the discard pile is currently a non-functional button (we also don't store the discarded cards anywhere the moment) -->
-					<button id="Discard">
-						<img src="/assets/images/backpuffingrass.png" />
-					</button>
+					<div class="row">
+						<div class="col-lg-2 col-md-2 col-sm-2">
+							<table>
+								<tr>
+									<td class="columnOfCards" id="discardPile">
+										<table>
+											<tr>
+												<td class="cardLocation l0" style="position: absolute; top: 0px;"></td>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</table>
+						</div>
+					</div>
 				</div>
 				<!-- Each cell of the card pile columns is styled so that as the piles are built up during the course of the game, only the top portion of each card is
 				displayed. -->
+
 				<div class="col-lg-2 col-md-2 col-sm-2">
 					<table>
 						<tr>
@@ -269,6 +281,9 @@ own bootstrap column, I had to break the table up into 4 smaller 1-column tables
 				console.log(game);
 
 				$(".columnOfCards .cardLocation").html("");
+        
+				getDiscardImagePath(game);
+        
 				// I had to change these each functions so that they displayed the card images instead of values.  Ninja requires you to store all static assets in the
 				// assets folder (which took a bit of research to find out; although it should have been obvious, I suppose).  Fortunately, I could still use the data
 				// generated from our java code to pick the correct/appropriate cards.  I just had to mix it with string values that are eventually turned into HTML by jquery
@@ -331,6 +346,26 @@ own bootstrap column, I had to break the table up into 4 smaller 1-column tables
 					dataType: "json"
 				});
 			}
+
+			//renders either the default card image or the top card in the discard pile
+			function getDiscardImagePath(game) {
+
+				//if discard pile is empty, use puffin
+				if(game.discardPile[0].length == 0){
+					$("#discardPile .l0").html(
+						'<img src="/assets/images/backpuffingrass.png" />'
+					);
+				}
+				else
+				{
+					var val = game.discardPile[0][game.discardPile[0].length - 1]; //get top card
+					//render top card
+					$('#discardPile .l0').html(
+						'<img src="assets/images/' + val.suit + val.value + '.png"/>'
+					);
+				}
+			}
+
 			// Only minor alterations had to be made here to get cards to discard when clicked (just had to specify the column number).
 			$('#c0').click(function() {
 				removeCard(0);
@@ -362,7 +397,7 @@ own bootstrap column, I had to break the table up into 4 smaller 1-column tables
 				});
 			});
 		</script>
-		
+
 		<script
 			type="text/javascript"
 			src="/assets/webjars/jquery/2.1.3/jquery.js"

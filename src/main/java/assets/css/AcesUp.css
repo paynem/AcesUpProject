@@ -1,5 +1,6 @@
 /*We wanted our game to have a green background (like gaming table at a casino).  The !important tag (or whatever)
 allows us to overrides bootstrap styling. */
+
 body {
 	background: #6ab446 !important;
 }
@@ -19,7 +20,7 @@ td {
 
 .cardLocation {
 	width: 100px;
-	
+
 }
 /* Minor styling to remove the borders of the deal and discard buttons */
 #dealButton {
@@ -30,3 +31,4 @@ td {
     border: none;
     background: transparent; 
 }
+
