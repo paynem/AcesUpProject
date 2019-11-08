@@ -57,15 +57,23 @@ public class Game {
     }
 
     public void remove(int columnNumber) {
-        if(columnHasCards(columnNumber)) {
-            Card initial = getTopCard(columnNumber);    // store card we attempt to remove
+     if(columnHasCards(columnNumber)) {
+            Card c = getTopCard(columnNumber);
+            boolean removeCard = false;
             for (int i = 0; i < 4; i++) {
-                if (i != columnNumber && columnHasCards(i)) {      // iterate each column with a card
-                    Card tempTop = getTopCard(i);
-                    if (initial.getSuit() == tempTop.getSuit() && initial.getValue() < tempTop.getValue()) { // if removal conditions apply
-                        this.cols.get(columnNumber).remove(this.cols.get(columnNumber).size() - 1);          // remove the card
+                if (i != columnNumber) {
+                    if (columnHasCards(i)) {
+                        Card compare = getTopCard(i);
+                        if (compare.getSuit() == c.getSuit()) {
+                            if (compare.getValue() > c.getValue()) {
+                                removeCard = true;
+                            }
+                        }
                     }
                 }
+            }
+            if (removeCard) {
+                this.cols.get(columnNumber).remove(this.cols.get(columnNumber).size() - 1);
             }
         }
     }
@@ -84,10 +92,13 @@ public class Game {
     }
 
     public void move(int columnFrom, int columnTo) {
-        // remove the top card from the columnFrom column, add it to the columnTo column
-        if(columnHasCards(columnFrom)){
-            addCardToCol(columnTo, getTopCard(columnFrom));
-            remove(columnFrom);
+       // remove the top card from the columnFrom column, add it to the columnTo column
+        if (columnHasCards(columnFrom)) {
+            if (!(columnHasCards(columnTo))) {
+                Card cardToMove = getTopCard(columnFrom);
+                this.removeCardFromCol(columnFrom);
+                this.addCardToCol(columnTo, cardToMove);
+            }
         }
     }
 
