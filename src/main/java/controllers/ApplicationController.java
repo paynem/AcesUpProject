@@ -56,5 +56,8 @@ public class ApplicationController {
         g.move(colFrom,colTo);
         return Results.json().render(g);
     }
+    
+    public Result endGame() { return Results.html().template("views/exitPage/endGame.html"); }
+
 
 }
