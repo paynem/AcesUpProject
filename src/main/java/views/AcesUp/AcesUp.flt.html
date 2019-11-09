@@ -260,15 +260,15 @@ own bootstrap column, I had to break the table up into 4 smaller 1-column tables
 				</div>
 				<!-- These buttons are currently functionless, but hopefully they'll work soon!  They use bootstrap buttons that take up the entire length of a column. -->
 				<div class="col-lg-2 col-md-2 col-sm-2">
-					<button type="undo" class="btn btn-secondary btn-lg btn-block">
+					<button id="undoButton" class="btn btn-secondary btn-lg btn-block">
 						Undo
 					</button>
 
-					<button type="restart" class="btn btn-secondary btn-lg btn-block">
+					<button id="restartButton" class="btn btn-secondary btn-lg btn-block">
 						Restart
 					</button>
 
-					<button type="exit" class="btn btn-secondary btn-lg btn-block">
+					<button type="exitButton" class="btn btn-secondary btn-lg btn-block">
 						Exit
 					</button>
 							<!-- Adds UI for moving to an empty column by manipulating the '#moveButton' function -->
@@ -382,8 +382,14 @@ own bootstrap column, I had to break the table up into 4 smaller 1-column tables
 				removeCard(3);
 			});
 			
+			// Displays message and reloads page
 			$("#exitButton").click(function() {
 				alert("Thanks for playing");
+				window.location.reload();
+			});
+			
+			//Just reloads the page so it restarts the game
+			$("#restartButton").click(function() {
 				window.location.reload();
 			});
 
