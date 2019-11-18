@@ -5,13 +5,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import java.io.Serializable;
 
-/**
- * Assignment 1: No changes are needed in this file, but it is good to be aware of for future assignments.
- */
-
 public class Card implements Serializable {
-    public final int value;
-    public final Suit suit;
+    private int value;
+    private Suit suit;
 
     @JsonCreator
     public Card(@JsonProperty("value") int value, @JsonProperty("suit") Suit suit) {
@@ -20,13 +16,22 @@ public class Card implements Serializable {
 
     }
 
+    public int getValue() {
+        return value;
+    }
+
     public Suit getSuit() {
         return suit;
     }
 
-    public int getValue() {
-        return value;
+    public void setValue(int value) {
+        this.value = value;
     }
+
+    public void setSuit(Suit suit) {
+        this.suit = suit;
+    }
+
 
     public String toString() {
         return this.value + this.suit.toString();
