@@ -16,6 +16,10 @@ public class Card implements Serializable {
 
     }
 
+    public enum Suit  implements Serializable {
+        Hearts, Spades, Diamonds, Clubs
+    }
+
     public int getValue() {
         return value;
     }
@@ -37,3 +41,4 @@ public class Card implements Serializable {
         return this.value + this.suit.toString();
     }
 }
+
