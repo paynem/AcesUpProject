@@ -258,11 +258,11 @@ own bootstrap column, I had to break the table up into 4 smaller 1-column tables
 						</tr>
 					</table>
 				</div>
-				<!-- These buttons are currently functionless, but hopefully they'll work soon!  They use bootstrap buttons that take up the entire length of a column. -->
+				<!--These buttons actually work now!  I replaced the Undo button with the rules button.  When clickd, this button brings up
+			a pop-up window with text that explains the game rules.-->
 				<div class="col-lg-2 col-md-2 col-sm-2">
-					<button type="undo" id="undoButton" class="btn btn-primary btn-lg btn-block">
-						Undo
-					</button>
+					<button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal"
+					data-target="#myModal">Rules</button>
 
 
 					<button type="restart" id="restartButton" class="btn btn-primary btn-lg btn-block">
@@ -272,10 +272,40 @@ own bootstrap column, I had to break the table up into 4 smaller 1-column tables
 					<a id="exitButton" class="btn btn-primary btn-lg btn-block" href="/endGame" role="button">Exit</a>
 					
 							<!-- Adds UI for moving to an empty column by manipulating the '#moveButton' function -->
-					<br>Move from column<input type="number" id="from_col"  min="0" max="3"/> to <input type="number" id="to_col" min="0" max="3" /> <button id="moveButton" class="btn btn-secondary btn-lg btn-block">Move</button>
+					<div class = "text-center"><br>Move from column<input type="number" id="from_col"  min="0" max="3"/> to <input type="number" id="to_col" min="0" max="3" /></div> <button id="moveButton" class="btn btn-primary btn-lg btn-block">Move</button>
 				</div>
 			</div>
 		</div>
+		<!--I used the bootstrap modal feature to add a popup that contains text explaining the game rules. -->
+	<div class="modal fade" id="myModal" tabindex="0" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog">
+
+			<div class="modal-content">
+				<div class="modal-header modal-primary">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<div class="text-center">
+						<h4 class="modal-title">Ace's Up Rules</h4>
+					</div>
+				</div>
+				<div class="modal-body">
+					<ol>
+						<li>Four cards in a row are dealt face up.</li>
+						<li>If there are two or more cards of the same suit, discard all but the highest-ranked card of
+							that suit.</li>
+						<li>Repeat step 2 until there are no more pairs of cards with the same suit.</li>
+						<li>Whenever there are any empty spaces, you may choose the top card of another pile (if it is
+							an ace) to be put into the empty space. After you do this, go to Step 2.</li>
+						<li>When there are no more cards to move or remove, deal out the next four cards from the deck
+							face-up onto each pile.</li>
+						<li>Repeat Step 2, using only the visible (top) cards on each of the four piles.</li>
+						<li>When the last four cards have been dealt out and any moves made, the game is over. The fewer
+							cards left in the tableau, the better. To win is to have only the four aces left.</li>
+					</ol>
+				</div>
+			</div>
+
+		</div>
+	</div>
 		<script>
 			var game;
 

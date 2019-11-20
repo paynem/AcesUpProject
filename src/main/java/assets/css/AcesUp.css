@@ -20,15 +20,25 @@ td {
 
 .cardLocation {
 	width: 100px;
-
 }
 /* Minor styling to remove the borders of the deal and discard buttons */
 #dealButton {
-    border: none;
-    background: transparent; 
+	border: none;
+	background: transparent;
 }
 #Discard {
-    border: none;
-    background: transparent; 
+	border: none;
+	background: transparent;
 }
-
+.modal-header {
+	background-color: #0275d8;
+	-webkit-border-top-left-radius: 3px;
+	-webkit-border-top-right-radius: 3px;
+	-moz-border-radius-topleft: 3px;
+	-moz-border-radius-topright: 3px;
+	border-top-left-radius: 3px;
+	border-top-right-radius: 3px;
+}
+.modal-title {
+	color: #ffffff;
+}
