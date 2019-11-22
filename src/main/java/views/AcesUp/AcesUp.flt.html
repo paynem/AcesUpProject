@@ -389,19 +389,33 @@ own bootstrap column, I had to break the table up into 4 smaller 1-column tables
 
 			$("#moveButton").click(function() {
 				var colFrom = $("#from_col").val();
+				var colFromLength = game.cols[colFrom]["length"]
 				var colTo = $("#to_col").val();
-				$.ajax({
-					type: "POST",
-					url: "/moveCard/" + colFrom + "/" + colTo,
-					data: JSON.stringify(game),
-					success: function(data, status) {
-						console.log("Data: " + data + "\nStatus: " + status);
-						game = data;
-						display(data);
-					},
-					contentType: "application/json; charset=utf-8",
-					dataType: "json"
-				});
+
+				//this if statement is in the front end rather than in the game class's move card function so that
+				//we don't have to render a new game state with an alert. We can have the browser do it
+
+				//if the top card is an ace, run the ajax call
+				if(game.cols[colFrom][colFromLength - 1].value == 14)
+				{
+					$.ajax({
+						type: "POST",
+						url: "/moveCard/" + colFrom + "/" + colTo,
+						data: JSON.stringify(game),
+						success: function(data, status) {
+							console.log("Data: " + data + "\nStatus: " + status);
+							game = data;
+							display(data);
+						},
+						contentType: "application/json; charset=utf-8",
+						dataType: "json"
+					});
+				}
+				else
+				{
+					//display an alert telling the user that they can only move an Ace
+					alert("You can only move Aces to empty piles");
+				}
 			});
 		</script>
 
