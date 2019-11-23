@@ -2,7 +2,7 @@ package models;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 //DealPile is a child of GroupOfCards.
@@ -18,7 +18,13 @@ public class DealPile extends GroupOfCards {
         }
     }
     // Shuffle uses the shuffle function from Collections to shuffle the deck
-
+    @JsonIgnore
+    public boolean dealPileStillGood(){
+        if (cards.size() >= 4 ){
+            return true;
+        }
+        return false;
+    }
     public void shuffle() {
         Collections.shuffle(cards);
     }

@@ -8,12 +8,7 @@ public class Test {
         g.dealFour();
         g.dealFour();
         g.dealFour();
-        System.out.println(g.a1.getCard(0));
-        System.out.println(g.a1.getCard(1));
-        System.out.println(g.a1.getCard(2));
-        System.out.println(g.a1.getCard(3));
-        System.out.println(g.a1.numCards());
-        System.out.println(g.dealPile.numCards());
+    
 
     }
     
