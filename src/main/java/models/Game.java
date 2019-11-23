@@ -61,6 +61,10 @@ public class Game {
         }
     }
 
+    public int getDiscardPileSize() {
+        return discardPile.getSize();
+    }
+
     public void remove(int columnNumber) {
      if(columnHasCards(columnNumber)) {
             Card c = getTopCard(columnNumber);

@@ -381,16 +381,15 @@ own bootstrap column, I had to break the table up into 4 smaller 1-column tables
 
 			//renders either the default card image or the top card in the discard pile
 			function getDiscardImagePath(game) {
-
 				//if discard pile is empty, use puffin
-				if(game.discardPile[0].getSize() == 0){
+				if(game.discardPile.size == 0){
 					$("#discardPile .l0").html(
 						'<img src="/assets/images/backpuffingrass.png" />'
 					);
 				}
 				else
 				{
-					var val = game.discardPile[0][game.discardPile[0].getSize() - 1]; //get top card
+					var val = game.discardPile[game.discardPile.size - 1]; //get top card
 					//render top card
 					$('#discardPile .l0').html(
 						'<img src="assets/images/' + val.suit + val.value + '.png"/>'
