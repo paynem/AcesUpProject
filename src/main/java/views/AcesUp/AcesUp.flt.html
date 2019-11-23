@@ -319,25 +319,25 @@ own bootstrap column, I had to break the table up into 4 smaller 1-column tables
 				// I had to change these each functions so that they displayed the card images instead of values.  Ninja requires you to store all static assets in the
 				// assets folder (which took a bit of research to find out; although it should have been obvious, I suppose).  Fortunately, I could still use the data
 				// generated from our java code to pick the correct/appropriate cards.  I just had to mix it with string values that are eventually turned into HTML by jquery
-				$.each(game.cols[0], function(key, val) {
+				$.each(game.Cols[0].Cards, function(key, val) {
 					$("#c0 .l" + key).html(
 						'<img src="assets/images/' + val.suit + val.value + '.png"/>'
 					);
 				});
 
-				$.each(game.cols[1], function(key, val) {
+				$.each(game.Cols[1].Cards, function(key, val) {
 					$("#c1 .l" + key).html(
 						'<img src="assets/images/' + val.suit + val.value + '.png"/>'
 					);
 				});
 
-				$.each(game.cols[2], function(key, val) {
+				$.each(game.Cols[2].Cards, function(key, val) {
 					$("#c2 .l" + key).html(
 						'<img src="assets/images/' + val.suit + val.value + '.png"/>'
 					);
 				});
 
-				$.each(game.cols[3], function(key, val) {
+				$.each(game.Cols[3].Cards, function(key, val) {
 					$("#c3 .l" + key).html(
 						'<img src="assets/images/' + val.suit + val.value + '.png"/>'
 					);
@@ -357,7 +357,7 @@ own bootstrap column, I had to break the table up into 4 smaller 1-column tables
 					success: function(data, status) {
 						console.log("Data: " + data + "\nStatus: " + status);
 						game = data;
-						display(data);
+						display(game);
 					},
 					contentType: "application/json; charset=utf-8",
 					dataType: "json"
@@ -419,14 +419,14 @@ own bootstrap column, I had to break the table up into 4 smaller 1-column tables
 
 			$("#moveButton").click(function() {
 				var colFrom = $("#from_col").val();
-				var colFromLength = game.cols[colFrom]["length"]
+				var colFromLength = game.Cols[colFrom].Cards.numCards;
 				var colTo = $("#to_col").val();
 
 				//this if statement is in the front end rather than in the game class's move card function so that
 				//we don't have to render a new game state with an alert. We can have the browser do it
 
 				//if the top card is an ace, run the ajax call
-				if(game.cols[colFrom][colFromLength - 1].value == 14)
+				if(game.Cols[colFrom].Cards[0].getValue == 14)
 				{
 					$.ajax({
 						type: "POST",

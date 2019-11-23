@@ -20,12 +20,13 @@ public class Card implements Serializable {
         Hearts, Spades, Diamonds, Clubs
     }
 
+    //@JsonProperty("GetValue")
     public int getValue() {
-        return value;
+        return this.value;
     }
 
     public Suit getSuit() {
-        return suit;
+        return this.suit;
     }
 
     public void setValue(int value) {
@@ -41,4 +42,3 @@ public class Card implements Serializable {
         return this.value + this.suit.toString();
     }
 }
-

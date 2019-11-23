@@ -3,6 +3,8 @@ package models;
 import java.util.ArrayList;
 import java.util.Collections;
 
+
+
 //DealPile is a child of GroupOfCards.
 public class DealPile extends GroupOfCards {
 // DealPile's constructor generates an arraylist with 52 cards
@@ -16,6 +18,7 @@ public class DealPile extends GroupOfCards {
         }
     }
     // Shuffle uses the shuffle function from Collections to shuffle the deck
+
     public void shuffle() {
         Collections.shuffle(cards);
     }

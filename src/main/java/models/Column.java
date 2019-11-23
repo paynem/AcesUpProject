@@ -1,14 +1,11 @@
 package models;
 
 import java.util.ArrayList;
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Column extends GroupOfCards{
-    private int colNumber;
+public class Column extends GroupOfCards {
 
-    @JsonCreator
-    public Column(@JsonProperty("colNumber") int colNumber) {
-        this.colNumber = colNumber;
+    public Column() {
+        cards = new ArrayList<>();
+
     }
 }
