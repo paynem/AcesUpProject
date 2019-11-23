@@ -1,6 +1,5 @@
 package models;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -46,10 +45,6 @@ public class Game {
                 this.dealPile.removeCard(0);
             }
         }
-    }
-
-    public int getDiscardPileSize() {
-        return discardPile.getSize();
     }
 
     public void remove(int columnNumber) {
