@@ -1,5 +1,6 @@
 package models;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -11,53 +12,51 @@ import java.util.Random;
  */
 public class Game {
 
-    public java.util.List<Card> deck = new ArrayList<>();
+    public GroupOfCards deck = new GroupOfCards();
     // My understanding is that List is an interface in java (not a class). Setting
     // cols up like this gives you
     // the flexibility to change it to something like a linked list later on if you
     // need to.
-    public java.util.List<java.util.List<Card>> cols = new ArrayList<>(4);
+    public java.util.List<Column> cols = new java.util.ArrayList<Column>();
 
-    public java.util.List<java.util.List<Card>> discardPile = new ArrayList<>(1);
+    public GroupOfCards discardPile = new GroupOfCards();
 
     public Game() {
         // Since we have an array list of arraylists. We need to set up the arraylist in
         // each index
-        ArrayList<Card> a1 = new ArrayList<Card>();
+        Column a1 = new Column(1);
         cols.add(a1);
-        ArrayList<Card> a2 = new ArrayList<Card>();
+        Column a2 = new Column(2);
         cols.add(a2);
-        ArrayList<Card> a3 = new ArrayList<Card>();
+        Column a3 = new Column(3);
         cols.add(a3);
-        ArrayList<Card> a4 = new ArrayList<Card>();
+        Column a4 = new Column(4);
         cols.add(a4);
 
-        ArrayList<Card> discard = new ArrayList<Card>();
-        discardPile.add(discard);
     }
 
     public void buildDeck() {
         for (int i = 2; i < 15; i++) {
-            deck.add(new Card(i, Card.Suit.Clubs));
-            deck.add(new Card(i, Card.Suit.Hearts));
-            deck.add(new Card(i, Card.Suit.Diamonds));
-            deck.add(new Card(i, Card.Suit.Spades));
+            deck.addCard((new Card(i, Card.Suit.Hearts)));
+            deck.addCard((new Card(i, Card.Suit.Diamonds)));
+            deck.addCard((new Card(i, Card.Suit.Spades)));
+            deck.addCard((new Card(i, Card.Suit.Clubs)));
         }
     }
 
     public void shuffle() {
         // Thankfully, Collections has a shuffle method built into it. This, well,
         // shuffles the deck
-        Collections.shuffle(deck);
+        Collections.shuffle(deck.cards);
     }
 
     public void dealFour() {
         // As long as the deck isn't empty, we pull 4 cards from it and put one of each
         // of them into the 4 columns.
-        if (deck.size() >= 4) {
+        if (deck.cards.size() >= 4) {
             for (int i = 0; i < 4; i++) {
-                addCardToCol(i, deck.get(0));
-                this.deck.remove(0);
+                addCardToCol(i, deck.getCard(0));
+                this.deck.removeCard(0);
             }
         }
     }
@@ -79,8 +78,8 @@ public class Game {
                 }
             }
             if (removeCard) {
-                this.cols.get(columnNumber).remove(this.cols.get(columnNumber).size() - 1);
-                this.discardPile.get(0).add(c);
+                this.cols.get(columnNumber).removeCard(this.cols.get(columnNumber).getSize() - 1);
+                this.discardPile.addCard(c);
             }
         }
     }
@@ -88,14 +87,14 @@ public class Game {
     private boolean columnHasCards(int columnNumber) {
         // check indicated column for number of cards; if no cards return false,
         // otherwise return true
-        if (this.cols.get(columnNumber).size() > 0) {
+        if (this.cols.get(columnNumber).getSize() > 0) {
             return true;
         }
         return false;
     }
 
     private Card getTopCard(int columnNumber) {
-        return this.cols.get(columnNumber).get(this.cols.get(columnNumber).size() - 1);
+        return this.cols.get(columnNumber).getCard(this.cols.get(columnNumber).getSize() - 1);
     }
 
     public void move(int columnFrom, int columnTo) {
@@ -111,10 +110,10 @@ public class Game {
     }
 
     private void addCardToCol(int columnTo, Card cardToMove) {
-        cols.get(columnTo).add(cardToMove);
+        cols.get(columnTo).addCard(cardToMove);
     }
 
     private void removeCardFromCol(int colFrom) {
-        this.cols.get(colFrom).remove(this.cols.get(colFrom).size() - 1);
+        this.cols.get(colFrom).removeCard(this.cols.get(colFrom).getSize() - 1);
     }
 }

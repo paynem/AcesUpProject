@@ -26,6 +26,11 @@ public class GroupOfCards {
         return false;
     }
 
+    public int getSize()
+    {
+        return cards.size();
+    }
+
     // getCard returns the value of whatever card currently resides in the chosen
     // index
     public Card getCard(int index) {

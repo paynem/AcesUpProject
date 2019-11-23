@@ -8,9 +8,9 @@ public class Test {
 
     }
     static void deckCheck(Game g) {
-        for (int i = 0; i < g.deck.size(); i++) {
+        for (int i = 0; i < g.deck.getSize(); i++) {
             System.out.print("Card " + (i+1) + ": ");
-            System.out.print(g.deck.get(i).toString());
+            System.out.print(g.deck.getCard(i).toString());
             System.out.print("\n");
         }
     }
@@ -25,10 +25,10 @@ public class Test {
     static void multipleDeals(Game g){
         for (int i = 0; i < 4; i++)
         {
-            for (int j = 0; j < g.cols.get(i).size(); j++)
+            for (int j = 0; j < g.cols.get(i).getSize(); j++)
             {
                 System.out.print("Column " + i + " card " + j + ": ");
-                System.out.print(g.cols.get(i).get(j).toString());
+                System.out.print(g.cols.get(i).getCard(j).toString());
                 System.out.print("\n");
             }
         }
