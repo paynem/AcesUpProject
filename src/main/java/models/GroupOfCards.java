@@ -28,6 +28,7 @@ public class GroupOfCards {
 
         return cards.get(index);
     }
+    
 
     // addCard adds the passed in card to the GroupOfCards arraylist
     public void addCard(Card card) {

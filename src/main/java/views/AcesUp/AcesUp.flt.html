@@ -383,14 +383,14 @@ own bootstrap column, I had to break the table up into 4 smaller 1-column tables
 			function getDiscardImagePath(game) {
 
 				//if discard pile is empty, use puffin
-				if(game.discardPile[0].length == 0){
+				if(game.DiscardPile.Cards.length == 0){
 					$("#discardPile .l0").html(
 						'<img src="/assets/images/backpuffingrass.png" />'
 					);
 				}
 				else
 				{
-					var val = game.discardPile[0][game.discardPile[0].length - 1]; //get top card
+					var val = game.DiscardPile.Cards[game.DiscardPile.Cards.length - 1]; //get top card
 					//render top card
 					$('#discardPile .l0').html(
 						'<img src="assets/images/' + val.suit + val.value + '.png"/>'
@@ -419,15 +419,14 @@ own bootstrap column, I had to break the table up into 4 smaller 1-column tables
 
 			$("#moveButton").click(function() {
 				var colFrom = $("#from_col").val();
-				var colFromLength = game.Cols[colFrom].Cards.numCards;
+				var colFromLength = game.Cols[colFrom].Cards.length
 				var colTo = $("#to_col").val();
-
 				//this if statement is in the front end rather than in the game class's move card function so that
 				//we don't have to render a new game state with an alert. We can have the browser do it
-
 				//if the top card is an ace, run the ajax call
-				if(game.Cols[colFrom].Cards[0].getValue == 14)
+				if(game.Cols[colFrom].Cards[colFromLength - 1].value == 14)
 				{
+				
 					$.ajax({
 						type: "POST",
 						url: "/moveCard/" + colFrom + "/" + colTo,

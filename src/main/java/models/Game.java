@@ -13,6 +13,8 @@ public class Game {
     private DealPile dealPile;
     @JsonProperty("Cols")
     protected java.util.ArrayList<Column> cols = new ArrayList<>(4);
+    @JsonProperty("DiscardPile")
+    private SuccessPile discardPile;
     /*@JsonProperty("A1")
     private Column a1 = new Column();
     @JsonProperty("A2")
@@ -22,7 +24,7 @@ public class Game {
     @JsonProperty("A4")
     private Column a4 = new Column();*/
 
-    public java.util.List<java.util.List<Card>> discardPile = new ArrayList<>(1);
+   // public java.util.List<java.util.List<Card>> discardPile = new ArrayList<>(1);
 
     public Game() {
 
@@ -37,8 +39,7 @@ public class Game {
         Column a4 = new Column();
         cols.add(a4);
 
-        ArrayList<Card> discard = new ArrayList<Card>();
-        discardPile.add(discard);
+        discardPile = new SuccessPile();
     }
 
     public void shuffle() {
@@ -56,6 +57,8 @@ public class Game {
                 this.dealPile.removeCard(0);
             }
         }
+        
+
     }
 
     public void remove(int columnNumber) {
@@ -77,6 +80,8 @@ public class Game {
             }
             if (removeCard) {
                 removeCardFromCol(columnNumber);
+                this.discardPile.addCard(c);
+
 
             }
         }
@@ -148,6 +153,7 @@ public class Game {
     public void move(int columnFrom, int columnTo) {
 
         // remove the top card from the columnFrom column, add it to the columnTo column
+        //if (cols.get(columnFrom).getCard(cols.get(columnFrom).numCards() - 1).getValue() == 14)
         if (columnHasCards(columnFrom)) {
             if (!(columnHasCards(columnTo))) {
                 Card cardToMove = getTopCard(columnFrom);
