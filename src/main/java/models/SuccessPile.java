@@ -2,10 +2,9 @@ package models;
 
 import java.util.ArrayList;
 
-public class Column extends GroupOfCards {
+public class SuccessPile extends GroupOfCards {
 
-    public Column() {
+    public SuccessPile() {
         cards = new ArrayList<>();
-
     }
 }

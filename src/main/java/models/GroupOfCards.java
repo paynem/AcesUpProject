@@ -1,10 +1,14 @@
 package models;
 
 import java.util.ArrayList;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 // GroupOfCards is the parent class of a large number of classes in our program.  It is designed to be a framework or skeleton for
 // any class that needs to house and manipulate playing cards
+
 public class GroupOfCards {
+    @JsonProperty("Cards")
     protected java.util.List<Card> cards;
 
     // The constructor creates an ArrayList, but it doesn't populate it with
@@ -18,7 +22,7 @@ public class GroupOfCards {
         return cards.size();
     }
 
-    // isEmpty is a boolean tmethod that returns true if GroupOfCards is empty
+    @JsonIgnore
     public boolean isEmpty() {
         if (numCards() == 0) {
             return true;
@@ -34,7 +38,6 @@ public class GroupOfCards {
     // getCard returns the value of whatever card currently resides in the chosen
     // index
     public Card getCard(int index) {
-
         return cards.get(index);
     }
 
