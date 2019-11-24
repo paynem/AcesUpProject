@@ -273,9 +273,16 @@ own bootstrap column, I had to break the table up into 4 smaller 1-column tables
 					
 							<!-- Adds UI for moving to an empty column by manipulating the '#moveButton' function -->
 					<div class = "text-center"><br>Move from column<input type="number" id="from_col"  min="0" max="3"/> to <input type="number" id="to_col" min="0" max="3" /></div> <button id="moveButton" class="btn btn-primary btn-lg btn-block">Move</button>
+					
+					<!-- Snackbar/Toast Bootstrap UI Button for Score -->
+					<button class = "btn  btn-primary btn-lg btn-block" onclick="myFunction()">Score</button>
 				</div>
 			</div>
 		</div>
+		
+		<!-- Score UI Functionality -->
+		<div id="scoreid"></div>
+		
 		<!--I used the bootstrap modal feature to add a popup that contains text explaining the game rules. -->
 	<div class="modal fade" id="myModal" tabindex="-1">
 		<div class="modal-dialog">
@@ -445,6 +452,19 @@ own bootstrap column, I had to break the table up into 4 smaller 1-column tables
 					alert("You can only move Aces to empty piles");
 				}
 			});
+			$('.toast').toast(option)
+			function myFunction() {
+			   // Get the snackbar DIV
+			   document.getElementById("scoreid").innerHTML="Score: "+game.DiscardPile.Cards.length;
+			   var x = document.getElementById("scoreid")
+
+			   // Add the "show" class to DIV
+			   x.className = "show";
+
+			   // After 3 seconds, remove the show class from DIV
+			   setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+			}
+
 		</script>
 
 		<script
