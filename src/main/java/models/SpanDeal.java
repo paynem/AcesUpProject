@@ -6,20 +6,23 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 
 //DealPile is a child of GroupOfCards.
-public class DealPile extends GroupOfCards {
+public class SpanDeal extends GroupOfCards {
 // DealPile's constructor generates an arraylist with 52 cards
-    public DealPile() {
+    public SpanDeal() {
         cards = new ArrayList<>();
-        for (int i = 2; i < 15; i++) {
-            cards.add(new Card(i, Card.Suit.Clubs));
-            cards.add(new Card(i, Card.Suit.Hearts));
-            cards.add(new Card(i, Card.Suit.Diamonds));
-            cards.add(new Card(i, Card.Suit.Spades));
+        for (int i = 2; i < 14; i++) {
+            cards.add(new Card(i, Card.Suit.Bastos));
+            cards.add(new Card(i, Card.Suit.Oros));
+            cards.add(new Card(i, Card.Suit.Copas));
+            cards.add(new Card(i, Card.Suit.Espadas));
         }
+        cards.add(new Card(14, Card.Suit.Jokera));
+        cards.add(new Card(14, Card.Suit.Jokerb));
     }
     // Shuffle uses the shuffle function from Collections to shuffle the deck
+    
     @JsonIgnore
-    public boolean dealPileStillGood(){
+    public boolean SpanDealPileStillGood(){
         if (cards.size() >= 2 ){
             return true;
         }

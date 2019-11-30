@@ -10,14 +10,13 @@ public class Game {
     // the flexibility to change it to something like a linked list later on if you
     // need to.
     @JsonProperty("DealPile")
-    private DealPile dealPile;
+    protected DealPile dealPile;
     @JsonProperty("Cols")
-    private java.util.List<Column> cols = new ArrayList<>(4);
+    protected java.util.List<Column> cols = new ArrayList<>(4);
     @JsonProperty("DiscardPile")
-    private SuccessPile discardPile;
+    protected SuccessPile discardPile;
 
     public Game() {
-
         dealPile = new DealPile();
 
         Column a1 = new Column();
@@ -73,7 +72,7 @@ public class Game {
 
     }
 
-    private boolean columnHasCards(int columnNumber) {
+    protected boolean columnHasCards(int columnNumber) {
         // check indicated column for number of cards; if no cards return false,
         // otherwise return true
         if (!this.cols.get(columnNumber).isEmpty()) {
@@ -82,7 +81,7 @@ public class Game {
         return false;
     }
 
-    private Card getTopCard(int columnNumber) {
+    protected Card getTopCard(int columnNumber) {
         return this.cols.get(columnNumber).getCard((cols.get(columnNumber).numCards() - 1));
     }
 
@@ -97,11 +96,11 @@ public class Game {
         }
     }
 
-    private void addCardToCol(int columnTo, Card cardToMove) {
+    protected void addCardToCol(int columnTo, Card cardToMove) {
         cols.get(columnTo).addCard(cardToMove);
     }
 
-    private void removeCardFromCol(int colFrom) {
+    protected void removeCardFromCol(int colFrom) {
         cols.get(colFrom).removeCard(cols.get(colFrom).numCards() - 1);
     }
 }
