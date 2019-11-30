@@ -20,7 +20,7 @@ public class DealPile extends GroupOfCards {
     // Shuffle uses the shuffle function from Collections to shuffle the deck
     @JsonIgnore
     public boolean dealPileStillGood(){
-        if (cards.size() >= 2 ){
+        if (cards.size() >= 4 ){
             return true;
         }
         return false;

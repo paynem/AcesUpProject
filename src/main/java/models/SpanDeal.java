@@ -22,8 +22,8 @@ public class SpanDeal extends GroupOfCards {
     // Shuffle uses the shuffle function from Collections to shuffle the deck
     
     @JsonIgnore
-    public boolean SpanDealPileStillGood(){
-        if (cards.size() >= 2 ){
+    public boolean spanDealPileStillGood(){
+        if (cards.size() >= 4 ){
             return true;
         }
         return false;

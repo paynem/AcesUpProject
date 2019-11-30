@@ -1,8 +1,9 @@
 package models;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 // SpanGame inherits from Game.Java
-// It generates a spanish deck instead of a regular deck and has a few slightly adjusted methods to deal with the differences in cards and rules.
+// It generates a spanish deck instead of a regular deck and has a few slightly adjusted methods to deal with the differences in cards
 public class SpanGame extends Game {
     @JsonProperty("DealPile")
     private SpanDeal spanDeal;
@@ -22,22 +23,22 @@ public class SpanGame extends Game {
 
         discardPile = new SuccessPile();
     }
-    
+
     public void shuffle() {
         spanDeal.shuffle();
     }
 
-    // This function had to be adjusted so that it deals the two remaining cards (after 50 cards have been dealt)
+    // This function had to be adjusted so that it deals the two remaining cards
+    // (after 50 cards have been dealt)
     public void dealFour() {
         // As long as the deck isn't empty, we pull 4 cards from it and put one of each
         // of them into the 4 columns.
-        if (spanDeal.SpanDealPileStillGood()) {
+        if (spanDeal.spanDealPileStillGood()) {
             for (int i = 0; i < 4; i++) {
                 addCardToCol(i, spanDeal.getCard(0));
                 this.spanDeal.removeCard(0);
             }
-        }
-        if (spanDeal.numCards() == 2) {
+        } else if (spanDeal.numCards() == 2) {
             addCardToCol(0, spanDeal.getCard(0));
             this.spanDeal.removeCard(0);
             addCardToCol(1, spanDeal.getCard(0));
@@ -45,7 +46,8 @@ public class SpanGame extends Game {
         }
     }
 
-    // Lol what a nightmare this function is.  However, it does deal with the Joker cards.  It only discards off of Joker cards (it prioritizes non-Joker cards)
+    // Lol what a nightmare this function is. However, it does deal with the Joker
+    // cards. It only discards off of Joker cards (it prioritizes non-Joker cards)
     // if there are no other suitable cards to discard off of.
     public void remove(int columnNumber) {
         int jokerNum = -1;
@@ -62,8 +64,7 @@ public class SpanGame extends Game {
                             if (compare.getValue() > c.getValue()) {
                                 removeCard = true;
                             }
-                        }
-                        else if (compare.isCardJoker()) {
+                        } else if (compare.isCardJoker()) {
                             jokerNum = i;
                             joker = compare;
                         }
@@ -83,3 +84,4 @@ public class SpanGame extends Game {
         }
 
     }
+}
