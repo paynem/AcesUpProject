@@ -10,7 +10,6 @@ of the includes that we needed to implement bootstrap and such.-->
 <link href="/assets/webjars/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" />
 <script type="text/javascript" src="/assets/webjars/jquery/2.1.3/jquery.js"></script>
 </head>
-
 <body>
 	<!-- Our layout uses bootstrap to divide the elements into 6 2-unit length columns.  The deal and discard piles occupy the first column.
 Each card pile gets its own separate column.  Also, originally, the card piles were organized into one large table with 4 columns.  In order to give each card pile its 
@@ -18,32 +17,16 @@ own bootstrap column, I had to break the table up into 4 smaller 1-column tables
 	<div class="container">
 		<div class="row">
 			<!--The deal pile acts as a deal button as well.  When the user taps it or single clicks it, it deals 4 cards as long there are cards remaining in the deck.
-				Both buttons were styled to remove the button border, so they were more uniform with the card piles. -->
-
+				Both buttons were styled to remove the button border, so they were more uniform with the card piles.
+				Additionally, I swapped the discardPile back to a button, for slightly nicer formatting/styling -->
 			<div class="col-lg-2 col-md-2 col-sm-2">
 				<button id="dealButton">
-					<img src="/assets/images/backpuffingrass.png" />
+					<img src="/assets/images/backpuffingrass.png" class="img-responsive" width="100" height="150" />
+				</button>
+				<button id="discardPile">
 				</button>
 				<br />
-				<div class="row">
-					<div class="col-lg-2 col-md-2 col-sm-2">
-						<table>
-							<tr>
-								<td class="columnOfCards" id="discardPile">
-									<table>
-										<tr>
-											<td class="cardLocation l0" style="position: absolute; top: 0px;"></td>
-										</tr>
-									</table>
-								</td>
-							</tr>
-						</table>
-					</div>
-				</div>
 			</div>
-			<!-- Each cell of the card pile columns is styled so that as the piles are built up during the course of the game, only the top portion of each card is
-				displayed. -->
-
 			<div class="col-lg-2 col-md-2 col-sm-2">
 				<table>
 					<tr>
@@ -344,7 +327,8 @@ own bootstrap column, I had to break the table up into 4 smaller 1-column tables
 		document.addEventListener('DOMContentLoaded', function () {
 			$("#choiceModal").modal();
 			$('#regularButton').on('click', function (event) {
-				event.preventDefault(); $.getJSON("http://localhost:8080/game", function (data) {
+				event.preventDefault();
+				$.getJSON("http://localhost:8080/game", function (data) {
 					display(data);
 					game = data;
 					$('#choiceModal').modal('hide');
@@ -359,8 +343,9 @@ own bootstrap column, I had to break the table up into 4 smaller 1-column tables
 				});
 
 			});
-			
+
 		}, false);
+		
 		var game;
 
 		function display(game) {
@@ -398,11 +383,6 @@ own bootstrap column, I had to break the table up into 4 smaller 1-column tables
 			});
 		}
 
-		// Calls ApplicationController.gameGet()
-		/*$.getJSON("http://localhost:8080/game", function (data) {
-			display(data);
-			game = data;
-		});*/
 		$("#dealButton").click(function () {
 			$.ajax({
 				type: "POST",
@@ -461,15 +441,15 @@ own bootstrap column, I had to break the table up into 4 smaller 1-column tables
 		function getDiscardImagePath(game) {
 			//if discard pile is empty, use puffin
 			if (game.DiscardPile.Cards.length == 0) {
-				$("#discardPile .l0").html(
-					'<img src="/assets/images/backpuffingrass.png"/>'
+				$("#discardPile").html(
+					'<img src="/assets/images/backpuffingrass.png" class="img-responsive" width="100" height="150" />'
 				);
-			}
-			else {
+			} else {
 				var val = game.DiscardPile.Cards[game.DiscardPile.Cards.length - 1]; //get top card
 				//render top card
-				$('#discardPile .l0').html(
-					'<img src="assets/images/' + val.suit + val.value + '.png" class="img-responsive"/>'
+				$("#discardPile").html(
+					'<img src="assets/images/' + val.suit + val.value +
+					'.png" class="img-responsive" width="100" height="150" />'
 				);
 			}
 		}
@@ -526,14 +506,14 @@ own bootstrap column, I had to break the table up into 4 smaller 1-column tables
 					contentType: "application/json; charset=utf-8",
 					dataType: "json"
 				});
-				
-			}
-			else {
+
+			} else {
 				//display an alert telling the user that they can only move an Ace
 				alert("You can only move Aces to empty piles");
 			}
 		});
 		$('.toast').toast(option)
+
 		function myFunction() {
 			// Get the snackbar DIV
 			document.getElementById("scoreid").innerHTML = "Score: " + game.DiscardPile.Cards.length;
@@ -543,9 +523,10 @@ own bootstrap column, I had to break the table up into 4 smaller 1-column tables
 			x.className = "show";
 
 			// After 3 seconds, remove the show class from DIV
-			setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+			setTimeout(function () {
+				x.className = x.className.replace("show", "");
+			}, 3000);
 		}
-
 	</script>
 
 	<script type="text/javascript" src="/assets/webjars/jquery/2.1.3/jquery.js"></script>
