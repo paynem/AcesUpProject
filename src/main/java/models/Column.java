@@ -18,7 +18,7 @@ public class Column extends GroupOfCards {
         }
     }
     
-    public void discard(ArrayList<Column> cols) {
+    public void discard(ArrayList<Column> cols, SuccessPile discardPile) {
         int jokerNum = -1;
         Card joker = new Card(14, Card.Suit.Jokera);
         if (!this.cards.isEmpty()) {
@@ -42,10 +42,12 @@ public class Column extends GroupOfCards {
             }
             if (removeCard) {
                 removeCardFromCol();
-                //this.discardPile.addCard(c);
+                discardPile.addCard(c);
             }
             else if (!removeCard && jokerNum != -1){
                 removeCardFromCol();
+                discardPile.addCard(c);
+                discardPile.addCard(cols.get(jokerNum).getCard(cols.get(jokerNum).numCards() - 1));
                 cols.get(jokerNum).removeCard(cols.get(jokerNum).numCards() - 1);
             }
         }

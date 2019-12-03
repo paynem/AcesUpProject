@@ -69,12 +69,12 @@ public class ApplicationController {
     }
 
     public Result removeCard(Context context, @PathParam("column") int colNumber, Game g) {
-        g.getColumns().get(colNumber).discard(g.getColumns());
+        g.getColumns().get(colNumber).discard(g.getColumns(), g.getDiscardPile());
         return Results.json().render(g);
     }
 
     public Result sremoveCard(Context context, @PathParam("column") int colNumber, SpanGame g1) {
-        g1.getColumns().get(colNumber).discard(g1.getColumns());
+        g1.getColumns().get(colNumber).discard(g1.getColumns(), g1.getDiscardPile());
         return Results.json().render(g1);
     }
 

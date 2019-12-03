@@ -42,4 +42,9 @@ public class Game {
     public ArrayList<Column> getColumns() {
         return cols;
     }
+
+    @JsonIgnore
+    public SuccessPile getDiscardPile() {
+        return discardPile;
+    }
 }
