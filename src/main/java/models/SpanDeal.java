@@ -1,9 +1,6 @@
 package models;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 
 //DealPile is a child of GroupOfCards.
 public class SpanDeal extends DealPile {

@@ -12,7 +12,7 @@ public class Game {
     // the flexibility to change it to something like a linked list later on if you
     // need to.
     @JsonProperty("DealPile")
-    public DealPile dealPile;
+    protected DealPile dealPile;
     @JsonProperty("Cols")
     protected java.util.ArrayList<Column> cols = new ArrayList<>(4);
     @JsonProperty("DiscardPile")
