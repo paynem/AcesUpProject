@@ -33,7 +33,7 @@ public class Column extends GroupOfCards {
                     }
                 }
             }
-            if (removeCard || (!removeCard && jokerNum != -1)) {
+            if (removeCard || (jokerNum != -1)) {
                 removeCardFromCol();
                 discardPile.addCard(c);
                 if (!removeCard){
