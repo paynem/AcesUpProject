@@ -29,8 +29,7 @@ import ninja.params.PathParam;
 // version of the game.
 @Singleton
 public class ApplicationController {
-    boolean spanishGame = false;
-
+    
     public Result index() {
         return Results.html().template("views/AcesUp/AcesUp.flt.html");
     }
