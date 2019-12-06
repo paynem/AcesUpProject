@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 // It generates a spanish deck instead of a regular deck and has a few slightly adjusted methods to deal with the differences in cards
 public class SpanGame extends Game {
     @JsonProperty("DealPile")
-    private SpanDeal spanDeal;
+    protected SpanDeal spanDeal;
 
     public SpanGame() {
 
