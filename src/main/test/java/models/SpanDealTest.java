@@ -43,6 +43,7 @@ public class SpanDealTest {
         assertEquals(false, a4.isEmpty());
     }
 
+    @Test
     // Method functions exactly the same way as dealFour from Class DealPile
     public void dealFourSpanDealEmpty() {
         // Assign a temp variable to the constructor of SpanDeal class
@@ -116,9 +117,9 @@ public class SpanDealTest {
             temp.dealFour(cols);
         }
 
-        assertEquals(14, a1.numCards());
-        assertEquals(14, a2.numCards());
-        assertEquals(13, a3.numCards());
-        assertEquals(13, a4.numCards());
+        assertEquals(13, a1.numCards());
+        assertEquals(13, a2.numCards());
+        assertEquals(12, a3.numCards());
+        assertEquals(12, a4.numCards());
     }
 }
