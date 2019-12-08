@@ -366,6 +366,32 @@ own bootstrap column, I had to break the table up into 4 smaller 1-column tables
 
 			</div>
 		</div>
+
+
+
+		<!-- This is the modal for the end game pop-up for when the game is over or if it's been won -->
+		<div class="modal fade" id="endGameModal" tabindex="0">
+			<div class="modal-dialog">
+
+				<div class="modal-content">
+					<div class="modal-header modal-primary">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<div class="text-center">
+							<h4 class="modal-end-title"></h4>
+						</div>
+					</div>
+					<div class="modal-body">
+
+						<button type="button" id="endRestartButton" class="btn btn-primary btn-lg btn-block">
+							Restart
+						</button>
+						<a id="endExitButton" class="btn btn-primary btn-lg btn-block" href="/endGame" role="button">Exit</a>
+
+					</div>
+				</div>
+
+			</div>
+		</div>
 		<script>
 			let gameMode;
 			var game;
@@ -505,6 +531,38 @@ own bootstrap column, I had to break the table up into 4 smaller 1-column tables
 				}
 			}
 
+			//Changes text in the end of game modal based on win/lose condition (checked below in wincheck)
+			function endGameText(text) {
+				document.getElementsByClassName("modal-end-title")[0].innerHTML = text;
+			}
+
+			// This is called after each card click. Checks if deal pile is empty or not for end game status
+			// then based on if success pile is full or not it will display win or lose. I don't check for
+			// aces cause it is already asserted that that happens
+			function winCheck(game) {
+				if (gameMode === "reg") {
+					if ( game.DealPile.Cards.length === 0 ) {
+						if ( game.DiscardPile.Cards.length === 48 ) {
+							endGameText("You Won!");
+							$("#endGameModal").modal();
+						} else {
+							endGameText("Sorry, you have lost!");
+							$("#endGameModal").modal();
+						}
+					}
+				} else {
+					if ( game.DealPile.Cards.length === 0 ) {
+						if ( game.DiscardPile.Cards.length === 46 ) {
+							endGameText("You Won!");
+							$("#endGameModal").modal();
+						} else {
+							endGameText("Sorry, you have lost!");
+							$("#endGameModal").modal();
+						}
+					}
+				}
+			}
+
 			//renders either the default card image or the top card in the discard pile
 			function getDiscardImagePath(game) {
 				//if discard pile is empty, use puffin
@@ -525,19 +583,27 @@ own bootstrap column, I had to break the table up into 4 smaller 1-column tables
 			// Only minor alterations had to be made here to get cards to discard when clicked (just had to specify the column number).
 			$('#c0').click(function () {
 				removeCard(0);
+				winCheck(game);
 			});
 			$('#c1').click(function () {
 				removeCard(1);
+				winCheck(game);
 			});
 			$('#c2').click(function () {
 				removeCard(2);
+				winCheck(game);
 			});
 			$('#c3').click(function () {
 				removeCard(3);
+				winCheck(game);
 			});
 
 			//Just reloads the page so it restarts the game
 			$("#restartButton").click(function () {
+				window.location.reload();
+			});
+
+			$("#endRestartButton").click(function () {
 				window.location.reload();
 			});
 
