@@ -30,6 +30,6 @@ public class GameTest {
         Game g = new Game();
 
         // See if the accessor returns the same discard pile as the one instantiated
-        assertEquals(g.dealPile, g.getDiscardPile());
+        assertEquals(g.discardPile, g.getDiscardPile());
     }
 }
