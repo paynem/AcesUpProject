@@ -57,7 +57,7 @@ public class CardTest {
     // Test the isCardJoker function of Class Card
     public void isCardJokerTRUETest() {
         //given
-        Card c = new Card(5, Card.Suit.Jokera);
+        Card c = new Card(5, Card.Suit.JokerA);
 
         //then
         assertTrue(c.isCardJoker());
