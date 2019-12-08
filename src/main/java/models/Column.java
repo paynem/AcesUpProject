@@ -19,6 +19,13 @@ public class Column extends GroupOfCards {
     }
 
     public void discard(ArrayList<Column> cols, SuccessPile discardPile) {
+        //if top card in this column is an ace, don't discard
+        int topCardVal = this.getCard(this.numCards() - 1).getValue();
+        if(topCardVal == 14 || topCardVal == 15)
+        {
+            return;
+        }
+
         int jokerNum = -1;
         if (!this.cards.isEmpty()) {
             Card c = this.cards.get(cards.size() - 1);

@@ -20,7 +20,7 @@ public class Card implements Serializable {
     // Instead of creating a class that inherits from card, I simply put the new Spanish suits into this enum thingy.  Perhaps creating a new class would be better, though
     // since that seems to be what they're trying to push us to do with the assignment.
     public enum Suit  implements Serializable {
-        Hearts, Spades, Diamonds, Clubs, Bastos, Oros, Copas, Espadas, Jokera, Jokerb
+        Hearts, Spades, Diamonds, Clubs, Bastos, Oros, Copas, Espadas, JokerA, JokerB
     }
 
     public int getValue() {
@@ -43,7 +43,7 @@ public class Card implements Serializable {
     @JsonIgnore
     public boolean isCardJoker()
     {
-        if (this.getSuit() == Suit.Jokera || this.getSuit() == Suit.Jokerb){
+        if (this.getSuit() == Suit.JokerA || this.getSuit() == Suit.JokerB){
             return true;
         }
         return false;

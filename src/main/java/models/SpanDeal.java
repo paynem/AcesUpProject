@@ -13,8 +13,8 @@ public class SpanDeal extends DealPile {
             cards.add(new Card(i, Card.Suit.Copas));
             cards.add(new Card(i, Card.Suit.Espadas));
         }
-        cards.add(new Card(15, Card.Suit.Jokera));
-        cards.add(new Card(15, Card.Suit.Jokerb));
+        cards.add(new Card(15, Card.Suit.JokerA));
+        cards.add(new Card(15, Card.Suit.JokerB));
     }
     // Shuffle uses the shuffle function from Collections to shuffle the deck
     public void dealFour(ArrayList<Column> cols) {
