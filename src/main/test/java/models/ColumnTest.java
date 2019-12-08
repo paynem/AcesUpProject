@@ -1,6 +1,8 @@
 package models;
 
 import org.junit.Test;
+import java.util.ArrayList;
+
 
 import static org.junit.Assert.*;
 
@@ -161,4 +163,135 @@ public class ColumnTest {
         // column 0
         assertEquals(randomCard, cols.get(0).getCard(0));
     }
+
+    @Test
+    public void jokerDiscard() {
+
+        // Create an array of 4 columns (to replicate what is done in Game.Java
+        // constructor)
+        java.util.ArrayList<Column> cols = new ArrayList<>(4);
+        Column a1 = new Column();
+        cols.add(a1);
+        Column a2 = new Column();
+        cols.add(a2);
+        Column a3 = new Column();
+        cols.add(a3);
+        Column a4 = new Column();
+        cols.add(a4);
+
+        // Create a discardPile (so we have a place for the discarded card to go)
+        SuccessPile discardPile = new SuccessPile();
+
+        // Assert both columns are empty
+        assertEquals(true, cols.get(0).cards.isEmpty());
+        assertEquals(true, cols.get(1).cards.isEmpty());
+        assertEquals(true, cols.get(2).cards.isEmpty());
+        assertEquals(true, cols.get(3).cards.isEmpty());
+
+        // Assert that discardPile is empty
+        assertEquals(true, discardPile.isEmpty());
+
+        // Create a temp card and add it to column "0"
+        Card randomCard = new Card(9, Card.Suit.Espadas);
+        cols.get(0).addCard(randomCard);
+        Card randomCard1 = new Card(15, Card.Suit.JokerA);
+        cols.get(1).addCard(randomCard1);
+
+        // Assert that columns 1 and 0 are not empty
+        assertEquals(false, cols.get(0).isEmpty());
+        assertEquals(false, cols.get(1).isEmpty());
+
+        // Try to Discard card in column 0 off of card in column 1
+        cols.get(0).discard(cols, discardPile);
+        // Assert that both columns 0 and 1 and empty (since we discarded off of a joker)
+        assertEquals(true, cols.get(0).isEmpty());
+        assertEquals(true, cols.get(1).isEmpty());
+
+        // Assert that discard pile has 2 cards (joker and card discarded off of joker)
+        assertEquals(true, discardPile.numCards() == 2);
+
+        // Assert that discard was successful and that both joker and other card are in discard pile now
+        assertEquals(randomCard, discardPile.getCard(0));
+        assertEquals(randomCard1, discardPile.getCard(1));
+    }
+
+    @Test
+    public void noJokerDiscard() {
+
+        // Create an array of 4 columns (to replicate what is done in Game.Java
+        // constructor)
+        java.util.ArrayList<Column> cols = new ArrayList<>(4);
+        Column a1 = new Column();
+        cols.add(a1);
+        Column a2 = new Column();
+        cols.add(a2);
+        Column a3 = new Column();
+        cols.add(a3);
+        Column a4 = new Column();
+        cols.add(a4);
+
+        // Create a discardPile (so we have a place for the discarded card to go)
+        SuccessPile discardPile = new SuccessPile();
+
+        // Assert both columns are empty
+        assertEquals(true, cols.get(0).cards.isEmpty());
+        assertEquals(true, cols.get(1).cards.isEmpty());
+        assertEquals(true, cols.get(2).cards.isEmpty());
+        assertEquals(true, cols.get(3).cards.isEmpty());
+
+        // Assert that discardPile is empty
+        assertEquals(true, discardPile.isEmpty());
+
+        // Create a temp card and add it to column "0"
+        Card randomCard = new Card(9, Card.Suit.Espadas);
+        cols.get(0).addCard(randomCard);
+        Card randomCard1 = new Card(10, Card.Suit.Espadas);
+        cols.get(1).addCard(randomCard1);
+        Card randomCard2 = new Card(15, Card.Suit.JokerA);
+        cols.get(2).addCard(randomCard1);
+
+        // Assert that columns 2, 1 and 0 are not empty
+        assertEquals(false, cols.get(0).isEmpty());
+        assertEquals(false, cols.get(1).isEmpty());
+        assertEquals(false, cols.get(1).isEmpty());
+
+        // Try to Discard card in column 0 off of card in column 1
+        cols.get(0).discard(cols, discardPile);
+
+        // Assert that column 0 is empty
+        assertEquals(true, cols.get(0).isEmpty());
+
+        // Assert that columns 1 and  2 aren't empty (since discard didn't happen off of joker)
+        assertEquals(false, cols.get(1).isEmpty());
+
+        // Asser that discard Pile has 1 card (and not 2) since discard happened off of regular card
+        assertEquals(true, discardPile.numCards() == 1);
+
+        // Assert that discard was successful and that discarded card is in discardPile
+        assertEquals(randomCard, discardPile.getCard(0));
+    }
+
+
+    @Test
+    public void removeCardFromCol() {
+        // Create an arbitrary column
+        Column a1 = new Column();
+
+        // Assert that column is empty
+        assertEquals(true, a1.cards.isEmpty());
+
+        // Create a temp card and add it to column "a1"
+        Card randomCard = new Card(14, Card.Suit.Clubs);
+        a1.cards.add(randomCard);
+
+        // Assert that column "a1" is not not empty
+        assertEquals(false, a1.cards.isEmpty());
+
+        // Removing card from column
+        a1.removeCardFromCol();
+
+        // Assert assert that card was removed from column and that column is now empty
+        assertEquals(true, a1.cards.isEmpty());
+    }
+
 }
