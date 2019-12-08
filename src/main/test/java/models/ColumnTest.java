@@ -71,7 +71,7 @@ public class ColumnTest {
         // Create an array of 4 columns (to replicate what is done in Game.Java
         // constructor)
 
-        java.util.ArrayList<Column> cols = new ArrayList<>(4);
+        java.util.ArrayList<Column> cols = new java.util.ArrayList<>(4);
         Column a1 = new Column();
         cols.add(a1);
         Column a2 = new Column();
@@ -118,7 +118,7 @@ public class ColumnTest {
         // Create an array of 4 columns (to replicate what is done in Game.Java
         // constructor)
 
-        java.util.ArrayList<Column> cols = new ArrayList<>(4);
+        java.util.ArrayList<Column> cols = new java.util.ArrayList<>(4);
         Column a1 = new Column();
         cols.add(a1);
         Column a2 = new Column();
